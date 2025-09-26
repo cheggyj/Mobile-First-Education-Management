@@ -31,9 +31,20 @@ def drawer() -> rx.Component:
                 rx.el.nav(
                     drawer_nav_item("Dashboard", "/", "layout-dashboard"),
                     drawer_nav_item("Overview", "/overview", "bar-chart-3"),
-                    drawer_nav_item("Admin Overview", "/admin", "shield"),
-                    drawer_nav_item("Staff", "/staff", "users"),
-                    drawer_nav_item("Students", "/students", "user-round"),
+                    rx.cond(
+                        AuthState.is_admin,
+                        rx.fragment(
+                            drawer_nav_item("Admin Overview", "/admin", "shield"),
+                            drawer_nav_item("Staff", "/staff", "users"),
+                            drawer_nav_item("Students", "/students", "user-round"),
+                        ),
+                    ),
+                    rx.cond(
+                        AuthState.is_teacher
+                        | AuthState.is_student
+                        | AuthState.is_parent,
+                        drawer_nav_item("Marks", "/marks", "graduation-cap"),
+                    ),
                     class_name="flex flex-col gap-1 p-2",
                     on_click=BaseState.toggle_drawer,
                 ),

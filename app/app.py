@@ -5,8 +5,9 @@ from app.pages.overview import overview
 from app.pages.admin import admin
 from app.pages.staff import staff
 from app.pages.students import students
+from app.pages.marks import marks
 from app.states.auth_state import AuthState
-from app.db import User, Student, Staff
+from app.db import User, Student, Staff, Mark
 
 app = rx.App(
     theme=rx.theme(appearance="light"),
@@ -22,6 +23,7 @@ app = rx.App(
 app.add_page(login)
 app.add_page(dashboard, on_load=AuthState.require_login)
 app.add_page(overview, on_load=AuthState.require_login)
-app.add_page(admin, on_load=AuthState.require_login)
-app.add_page(staff, on_load=AuthState.require_login)
-app.add_page(students, on_load=AuthState.require_login)
+app.add_page(admin, on_load=AuthState.require_admin_privileges)
+app.add_page(staff, on_load=AuthState.require_admin_privileges)
+app.add_page(students, on_load=AuthState.require_admin_privileges)
+app.add_page(marks, on_load=AuthState.require_login)

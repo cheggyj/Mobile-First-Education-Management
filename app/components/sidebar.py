@@ -33,9 +33,18 @@ def sidebar() -> rx.Component:
             rx.el.nav(
                 nav_item("Dashboard", "/", "layout-dashboard"),
                 nav_item("Overview", "/overview", "bar-chart-3"),
-                nav_item("Admin Overview", "/admin", "shield"),
-                nav_item("Staff", "/staff", "users"),
-                nav_item("Students", "/students", "user-round"),
+                rx.cond(
+                    AuthState.is_admin,
+                    rx.fragment(
+                        nav_item("Admin Overview", "/admin", "shield"),
+                        nav_item("Staff", "/staff", "users"),
+                        nav_item("Students", "/students", "user-round"),
+                    ),
+                ),
+                rx.cond(
+                    AuthState.is_teacher | AuthState.is_student | AuthState.is_parent,
+                    nav_item("Marks", "/marks", "graduation-cap"),
+                ),
                 class_name="flex flex-col gap-1 p-2",
             ),
             class_name="flex-1",

@@ -4,7 +4,7 @@ import reflex as rx
 class User(rx.Model, table=True):
     email: str
     password: str
-    role: str = "staff"
+    role: str
 
 
 class Student(rx.Model, table=True):
@@ -19,3 +19,10 @@ class Staff(rx.Model, table=True):
     staff_type: str
     role: str
     contact: str
+
+
+class Mark(rx.Model, table=True):
+    student_id: int
+    subject: str
+    score: float
+    term: str

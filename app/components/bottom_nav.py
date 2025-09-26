@@ -1,4 +1,5 @@
 import reflex as rx
+from app.states.auth_state import AuthState
 
 
 def bottom_nav_item(text: str, href: str, icon: str) -> rx.Component:
@@ -14,7 +15,16 @@ def bottom_nav() -> rx.Component:
     return rx.el.div(
         bottom_nav_item("Dashboard", "/", "layout-dashboard"),
         bottom_nav_item("Overview", "/overview", "bar-chart-3"),
-        bottom_nav_item("Staff", "/staff", "users"),
-        bottom_nav_item("Students", "/students", "user-round"),
+        rx.cond(
+            AuthState.is_admin,
+            rx.fragment(
+                bottom_nav_item("Staff", "/staff", "users"),
+                bottom_nav_item("Students", "/students", "user-round"),
+            ),
+        ),
+        rx.cond(
+            AuthState.is_teacher | AuthState.is_student | AuthState.is_parent,
+            bottom_nav_item("Marks", "/marks", "graduation-cap"),
+        ),
         class_name="fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-gray-200 flex md:hidden z-40",
     )
