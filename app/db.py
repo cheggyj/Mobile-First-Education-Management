@@ -1,0 +1,21 @@
+import reflex as rx
+
+
+class User(rx.Model, table=True):
+    email: str
+    password: str
+    role: str = "staff"
+
+
+class Student(rx.Model, table=True):
+    name: str
+    grade: str
+    parent_guardian_details: str
+    medical_information: str
+
+
+class Staff(rx.Model, table=True):
+    name: str
+    staff_type: str
+    role: str
+    contact: str
