@@ -11,6 +11,7 @@ class StatCardData(TypedDict):
 
 class BaseState(rx.State):
     sidebar_open: bool = True
+    drawer_open: bool = False
     stats: list[StatCardData] = [
         {
             "title": "Total Students",
@@ -40,3 +41,6 @@ class BaseState(rx.State):
 
     def toggle_sidebar(self):
         self.sidebar_open = not self.sidebar_open
+
+    def toggle_drawer(self):
+        self.drawer_open = not self.drawer_open

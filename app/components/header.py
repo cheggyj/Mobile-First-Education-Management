@@ -9,7 +9,12 @@ def header() -> rx.Component:
             rx.el.button(
                 rx.icon("menu", class_name="w-6 h-6 text-gray-600"),
                 on_click=BaseState.toggle_sidebar,
-                class_name="p-2 rounded-md hover:bg-gray-100",
+                class_name="p-2 rounded-md hover:bg-gray-100 hidden md:block",
+            ),
+            rx.el.button(
+                rx.icon("menu", class_name="w-6 h-6 text-gray-600"),
+                on_click=BaseState.toggle_drawer,
+                class_name="p-2 rounded-md hover:bg-gray-100 md:hidden",
             ),
             class_name="flex items-center",
         ),
@@ -27,5 +32,5 @@ def header() -> rx.Component:
             ),
             class_name="flex items-center",
         ),
-        class_name="flex items-center justify-between h-16 px-4 bg-white/50 backdrop-blur-sm border-b border-gray-200",
+        class_name="flex items-center justify-between h-16 px-4 bg-white/50 backdrop-blur-sm border-b border-gray-200 md:w-full",
     )

@@ -56,7 +56,7 @@ def sidebar() -> rx.Component:
         ),
         class_name=rx.cond(
             BaseState.sidebar_open,
-            "w-64 bg-gray-50/50 border-r border-gray-200 flex flex-col transition-all duration-300",
-            "w-20 bg-gray-50/50 border-r border-gray-200 flex flex-col transition-all duration-300",
+            "w-64 bg-gray-50/50 border-r border-gray-200 flex-col transition-all duration-300 hidden md:flex",
+            "w-20 bg-gray-50/50 border-r border-gray-200 flex-col transition-all duration-300 hidden md:flex",
         ),
     )
